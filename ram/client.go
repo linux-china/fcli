@@ -100,10 +100,7 @@ func (c *Client) WithRetryTimes(retry int32) *Client {
 }
 
 func (c *Client) getCommontParam() map[string]string {
-	u, err := uuid.NewV4()
-	if err != nil {
-		panic(err)
-	}
+	u := uuid.NewV4()
 	params := map[string]string{ // common parameters, not include Signature
 		"Format":           "JSON",
 		"Version":          "2015-05-01",
