@@ -7,7 +7,7 @@ export VERSION=${version}
 bash hack/.go-autogen
 
 # build binary.
-xgo -go 1.8.3 -out bundles/fcli --targets="linux/amd64,darwin/amd64,windows/386" $GOPATH/src/github.com/aliyun/fcli
+xgo -go 1.14.14 -out bundles/fcli --targets="linux/amd64,darwin/amd64,windows/386" $GOPATH/src/github.com/aliyun/fcli
 
 # package binary.
 cd bundles
