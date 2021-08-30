@@ -758,7 +758,7 @@ var shellCmd = &cobra.Command{
 							fmt.Printf("Please input y/n:\n")
 						}
 					}
-					proj.CreateLogStore(*storeName, *ttl, *shardCnt)
+					_ = proj.CreateLogStore(*storeName, *ttl, *shardCnt, false, 1)
 					store, err = proj.GetLogStore(*storeName)
 				}
 				if store == nil {
