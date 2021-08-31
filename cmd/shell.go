@@ -327,7 +327,9 @@ var shellCmd = &cobra.Command{
 			flags := pflag.NewFlagSet("upsert-funciton", pflag.ContinueOnError)
 			help := flags.Bool("help", false, "")
 			desc := flags.String("description", "", "brief description")
+			instanceType := flags.String("instance-type", "", "Instance type, such e1, c1, gpu")
 			memory := flags.Int32P("memory", "m", 128, "memory size in MB")
+			gpuMemory := flags.Int32P("gpu-memory", "p", 8192, "GPU Memory Size MB")
 			timeout := flags.Int32("timeout", 30, "timeout in seconds")
 			initializationTimeout := flags.Int32P("initializationTimeout", "e", 30, "initializer timeout in seconds")
 			ossBucket := flags.StringP("code-bucket", "b", "", "oss bucket of the code")
@@ -392,12 +394,14 @@ var shellCmd = &cobra.Command{
 					WithFunctionName(functionName).
 					WithDescription(*desc).
 					WithMemorySize(*memory).
+					WithGpuMemorySize(*gpuMemory).
 					WithTimeout(*timeout).
 					WithInitializationTimeout(*initializationTimeout).
 					WithHandler(*handler).
 					WithInitializer(*initializer).
 					WithRuntime(*runtime).
-					WithEnvironmentVariables(envMap)
+					WithEnvironmentVariables(envMap).
+					WithInstanceType(*instanceType)
 
 				if *runtime == util.RuntimeCustomContainer {
 					input = createFunctionInputWithCustomContainerConfig(flags, input, *customContainerImage,
@@ -435,11 +439,17 @@ var shellCmd = &cobra.Command{
 				if flags.Changed("description") {
 					input.WithDescription(*desc)
 				}
+				if flags.Changed("instance-type") {
+					input.WithInstanceType(*instanceType)
+				}
 				if flags.Changed("etag") {
 					input.WithIfMatch(*etag)
 				}
 				if flags.Changed("memory") {
 					input.WithMemorySize(*memory)
+				}
+				if flags.Changed("gpu-memory") {
+					input.WithGpuMemorySize(*gpuMemory)
 				}
 				if flags.Changed("timeout") {
 					input.WithTimeout(*timeout)
