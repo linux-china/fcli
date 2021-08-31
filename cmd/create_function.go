@@ -47,7 +47,7 @@ func init() {
 	createFuncCmd.Flags().StringVarP(&createFuncInput.functionName, "function-name", "f", "", "the function name")
 	createFuncCmd.Flags().StringVar(&createFuncInput.description, "description", "", "brief description")
 	createFuncCmd.Flags().Int32VarP(&createFuncInput.memory, "memory", "m", 128, "memory size in MB")
-	createFuncCmd.Flags().Int32VarP(&createFuncInput.gpuMemory, "gpu-memory", "p", 8192, "GPU memory size in MB")
+	createFuncCmd.Flags().Int32VarP(&createFuncInput.gpuMemory, "gpu-memory", "p", 0, "GPU memory size in MB, only 8192 or 16384")
 	createFuncCmd.Flags().Int32Var(&createFuncInput.timeout, "timeout", 30, "timeout in seconds")
 	createFuncCmd.Flags().Int32VarP(&createFuncInput.initializationTimeout, "initializationTimeout", "e", 30, "timeout in seconds")
 	createFuncCmd.Flags().StringVarP(&createFuncInput.codeOSSBucket, "code-bucket", "b", "", "oss bucket of the code")

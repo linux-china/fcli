@@ -51,7 +51,7 @@ func init() {
 	updateFuncInput.handler = updateFuncCmd.Flags().StringP("handler", "h", "", "function handler")
 	updateFuncInput.initializer = updateFuncCmd.Flags().StringP("initializer", "i", "", "function initializer")
 	updateFuncInput.memory = updateFuncCmd.Flags().Int32P("memory", "m", 0, "memory size in MB")
-	updateFuncInput.gpuMemory = updateFuncCmd.Flags().Int32P("gpu-memory", "p", 0, "GPU memory size in MB")
+	updateFuncInput.gpuMemory = updateFuncCmd.Flags().Int32P("gpu-memory", "p", 0, "GPU memory size in MB, only 8192 or 16384")
 	updateFuncInput.codeOSSBucket = updateFuncCmd.Flags().StringP("bucket", "b", "", "oss code bucket")
 	updateFuncInput.codeOSSObject = updateFuncCmd.Flags().StringP("object", "o", "", "oss code object")
 	updateFuncInput.customContainerImage = updateFuncCmd.Flags().StringP("custom-container-image", "g", "", "custom container config image")
