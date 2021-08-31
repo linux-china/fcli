@@ -12,6 +12,7 @@ import (
 )
 
 type createFuncInputType struct {
+	instanceType           string
 	serviceName            string
 	functionName           string
 	description            string
@@ -41,6 +42,7 @@ func init() {
 	functionCmd.AddCommand(createFuncCmd)
 
 	createFuncCmd.Flags().Bool("help", false, "")
+	createFuncCmd.Flags().StringVarP(&createFuncInput.instanceType, "instance-type", "", "", "Instance Type, such as e1, c1, gpu")
 	createFuncCmd.Flags().StringVarP(&createFuncInput.serviceName, "service-name", "s", "", "the service name")
 	createFuncCmd.Flags().StringVarP(&createFuncInput.functionName, "function-name", "f", "", "the function name")
 	createFuncCmd.Flags().StringVar(&createFuncInput.description, "description", "", "brief description")
@@ -85,7 +87,8 @@ var createFuncCmd = &cobra.Command{
 			WithInitializationTimeout(createFuncInput.initializationTimeout).
 			WithHandler(createFuncInput.handler).
 			WithInitializer(createFuncInput.initializer).
-			WithRuntime(createFuncInput.runtime)
+			WithRuntime(createFuncInput.runtime).
+			WithInstanceType(createFuncInput.instanceType)
 
 		envMap := make(map[string]string)
 
