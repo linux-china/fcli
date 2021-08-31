@@ -24,6 +24,7 @@ type updateFuncInputType struct {
 	codeOSSBucket          *string
 	codeOSSObject          *string
 	memory                 *int32
+	gpuMemory              *int32
 	timeout                *int32
 	initializationTimeout  *int32
 	etag                   *string
@@ -50,6 +51,7 @@ func init() {
 	updateFuncInput.handler = updateFuncCmd.Flags().StringP("handler", "h", "", "function handler")
 	updateFuncInput.initializer = updateFuncCmd.Flags().StringP("initializer", "i", "", "function initializer")
 	updateFuncInput.memory = updateFuncCmd.Flags().Int32P("memory", "m", 0, "memory size in MB")
+	updateFuncInput.gpuMemory = updateFuncCmd.Flags().Int32P("gpu-memory", "p", 0, "GPU memory size in MB")
 	updateFuncInput.codeOSSBucket = updateFuncCmd.Flags().StringP("bucket", "b", "", "oss code bucket")
 	updateFuncInput.codeOSSObject = updateFuncCmd.Flags().StringP("object", "o", "", "oss code object")
 	updateFuncInput.customContainerImage = updateFuncCmd.Flags().StringP("custom-container-image", "g", "", "custom container config image")
@@ -109,6 +111,9 @@ var updateFuncCmd = &cobra.Command{
 		}
 		if cmd.Flags().Changed("memory") {
 			input.WithMemorySize(*updateFuncInput.memory)
+		}
+		if cmd.Flags().Changed("gpu-memory") {
+			input.WithGpuMemorySize(*updateFuncInput.gpuMemory)
 		}
 		if cmd.Flags().Changed("timeout") {
 			input.WithTimeout(*updateFuncInput.timeout)
