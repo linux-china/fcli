@@ -42,7 +42,7 @@ func init() {
 	functionCmd.AddCommand(createFuncCmd)
 
 	createFuncCmd.Flags().Bool("help", false, "")
-	createFuncCmd.Flags().StringVarP(&createFuncInput.instanceType, "instance-type", "", "", "Instance Type, such as e1, c1, gpu")
+	createFuncCmd.Flags().StringVarP(&createFuncInput.instanceType, "instance-type", "", "e1", "Instance Type, such as e1, c1, gpu")
 	createFuncCmd.Flags().StringVarP(&createFuncInput.serviceName, "service-name", "s", "", "the service name")
 	createFuncCmd.Flags().StringVarP(&createFuncInput.functionName, "function-name", "f", "", "the function name")
 	createFuncCmd.Flags().StringVar(&createFuncInput.description, "description", "", "brief description")
